@@ -1,0 +1,23 @@
+@startuml
+
+title Application
+
+class Application {
+    {static} ArrayList<User>
+    {static} ArrayList<Movie>
+}
+
+class Transaction {
+    -date: Date
+    -user: User
+    -movie: Movie
+}
+
+class Movie {
+    -title: String
+    -genre: String
+    -year: int
+    -price: double
+}
+
+@enduml
