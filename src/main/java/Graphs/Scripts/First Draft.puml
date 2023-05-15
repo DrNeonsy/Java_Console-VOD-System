@@ -1,0 +1,60 @@
+@startuml
+
+title First Draft
+
+abstract class User {
+    -name: String
+    -lastname: String
+    -email: String
+    -password: String
+    -phone: String
+    -address: String
+    -city: String
+    -zip: String
+    -country: String
+}
+
+class Buyer {
+    -buyerID: int
+    -creditCardNumber: String
+    -creditCardExpiration: String
+    -creditCardCVV: String
+}
+
+class Seller {
+    -sellerID: int
+}
+
+interface IUser {
+    +register(): void
+    +login(): void
+    +logout(): void
+    +viewUser(): void
+    +updateUser(): void
+    +viewMovie(): void
+    +viewTransactions(): void
+    +viewInventory(): void
+    +deleteUser(): void
+}
+
+interface IBuyer {
+    +addToCart(): void
+    +removeFromCart(): void
+    +checkout(): void
+    +viewCart(): void
+}
+
+interface ISeller {
+    +addMovie(): void
+    +removeMovie(): void
+    +updateMovie(): void
+}
+
+User <|-- Buyer
+User <|-- Seller
+
+User ...> IUser : <<realize>>
+Buyer ..> IBuyer : <<realize>>
+Seller ..> ISeller : <<realize>>
+
+@enduml
