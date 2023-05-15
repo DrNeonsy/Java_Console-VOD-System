@@ -15,7 +15,7 @@ class Transaction {
 
 class Movie {
     -title: String
-    -genre: String
+    -genre: ArrayList<String>
     -year: int
     -price: double
 }
