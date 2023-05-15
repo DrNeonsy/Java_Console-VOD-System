@@ -19,7 +19,7 @@ class Buyer {
     -creditCardNumber: String
     -creditCardExpiration: String
     -creditCardCVV: String
-    -transactions: ArrayList<Transaction>
+    -TRANSACTIONS: ArrayList<Transaction>
 }
 
 class Seller {

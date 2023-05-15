@@ -3,8 +3,8 @@
 title Application
 
 class Application {
-    {static} ArrayList<User>
-    {static} ArrayList<Movie>
+    +USERS ArrayList<User> {static}
+    +MOVIES ArrayList<Movie> {static}
 }
 
 class Transaction {
@@ -15,7 +15,7 @@ class Transaction {
 
 class Movie {
     -title: String
-    -genre: ArrayList<String>
+    -GENRE: ArrayList<String>
     -year: int
     -price: double
 }
