@@ -1,0 +1,41 @@
+@startuml Usecase Overview
+title Video On Demand System Use Cases
+
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+
+actor Buyer as "Buyer"
+actor Seller as "Seller"
+
+rectangle "Common User Management" as UserMgmt {
+    (Register)
+    (Login)
+    (Logout)
+    (viewUser)
+    (viewTransactions)
+    (viewInventory)
+    (updateUser)
+    (deleteUser)
+}
+
+rectangle "Customer" as InvMgmt {
+  Buyer -- (addToCart)
+  Buyer -- (removeFromCart)
+  Buyer -- (viewCart)
+  Buyer -- (checkout)
+  (checkout) .> (viewCart) : <<include>>
+}
+
+rectangle "Owner" as TransMgmt {
+  Seller -- (addMovie)
+  Seller -- (removeMovie)
+  Seller -- (updateMovie)
+  (updateMovie) .> (viewMovie) : <<extend>>
+}
+
+Buyer -- UserMgmt
+Buyer -- InvMgmt
+Buyer -- TransMgmt
+Seller -- UserMgmt
+Seller -- InvMgmt
+@enduml
