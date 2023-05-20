@@ -6,32 +6,32 @@ public class Input {
     // ───────────────────────────────────────────────────────────────────────────────
     // ───────────────────────────────Methods─────────────────────────────────────────
     // ───────────────────────────────────────────────────────────────────────────────
-    public static boolean isAlpha(String str) {
-        return str.matches("[a-zA-Z]+");
+    public static boolean isAlpha(String input) {
+        return input.matches("[a-zA-Z]+");
     }
 
-    public static boolean isAlphaWithSpaces(String str) {
-        return str.matches("[a-zA-Z ]+");
+    public static boolean isAlphaWithSpaces(String input) {
+        return input.matches("[a-zA-Z ]+");
     }
 
-    public static boolean isNumeric(String str) {
-        return str.matches("[0-9]+");
+    public static boolean isNumeric(String input) {
+        return input.matches("[0-9]+");
     }
 
-    public static boolean isAlphaNumeric(String str) {
-        return str.matches("[a-zA-Z0-9]+");
+    public static boolean isAlphaNumeric(String input) {
+        return input.matches("[a-zA-Z0-9]+");
     }
 
-    public static boolean isAlphaNumericWithSpaces(String str) {
-        return str.matches("[a-zA-Z0-9 ]+");
+    public static boolean isAlphaNumericWithSpaces(String input) {
+        return input.matches("[a-zA-Z0-9 ]+");
     }
 
-    public static boolean isAlphaNumericWithSpacesAndSpecialCharacters(String str) {
-        return str.matches("[a-zA-Z0-9 !@#$%^&*()_+=-]+");
+    public static boolean isAlphaNumericWithSpacesAndSpecialCharacters(String input) {
+        return input.matches("[a-zA-Z0-9 !@#$%^&*()_+=-]+");
     }
 
-    public static boolean isPhoneNumber(String str) {
-        return str.matches("[0-9]");
+    public static boolean isPhoneNumber(String input) {
+        return input.matches("[0-9]");
     }
 
     public static boolean isEmailInput(String input) {
@@ -46,11 +46,15 @@ public class Input {
         return input.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).*$");
     }
 
-    public static String getInput(String message, String what) {
+    public static String scanInput(String instruction, String what) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.printf("%n%s%n", message);
+        System.out.printf("%n%s%n", instruction);
         System.out.printf("Enter %s: ", what);
         return scanner.nextLine();
+    }
+
+    public static String verifyInput() {
+        return "";
     }
 }

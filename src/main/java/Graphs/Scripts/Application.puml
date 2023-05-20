@@ -8,16 +8,22 @@ class Application {
 }
 
 class Transaction {
+    -tID: int
     -date: Date
     -user: User
     -movie: Movie
 }
 
 class Movie {
+    -mID: int
     -title: String
-    -GENRE: ArrayList<String>
+    -GENRE: ArrayList<Genres>
     -year: int
     -price: double
 }
+
+enum Genres
+
+enum Countries
 
 @enduml

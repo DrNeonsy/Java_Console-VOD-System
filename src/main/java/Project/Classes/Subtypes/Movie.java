@@ -1,9 +1,19 @@
 package Project.Classes.Subtypes;
 
+import Project.Enums.Genres;
+
+import java.util.ArrayList;
+
 public class Movie {
     // ───────────────────────────────────────────────────────────────────────────────
     // ───────────────────────────────FIELDS──────────────────────────────────────────
     // ───────────────────────────────────────────────────────────────────────────────
+    private int mID;
+    private String title;
+    private final ArrayList<Genres> GENRE = new ArrayList<>();
+    private int year;
+    private double price;
+
 
     // ───────────────────────────────────────────────────────────────────────────────
     // ───────────────────────────────Constructor──────────────────────────────────────
