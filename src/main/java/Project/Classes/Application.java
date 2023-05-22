@@ -56,8 +56,7 @@ public class Application {
                         Min 2 Max 18
                         """,
                 "First Name",
-                uInput -> (Input.isAlpha(uInput)
-                        && Input.isInputLengthValid(uInput, 2, 18))
+                uInput -> (Input.isAlpha(uInput, 2, 18))
         );
 
         String lastname = Input.getValidInput(
@@ -67,8 +66,7 @@ public class Application {
                         Length: Min 2 Max 18
                         """,
                 "Last Name",
-                uInput -> (Input.isAlpha(uInput)
-                        && Input.isInputLengthValid(uInput, 2, 18))
+                uInput -> (Input.isAlpha(uInput, 2, 18))
         );
 
         String email = Input.getValidInput(
@@ -78,8 +76,7 @@ public class Application {
                         Length: Max 30
                         """,
                 "E-Mail",
-                uInput -> (Input.isEmailInput(uInput)
-                        && Input.isInputLengthValid(uInput, 0, 30))
+                uInput -> (Input.isEmailInput(uInput, 30))
         );
 
         String password = Input.getValidInput(
@@ -88,8 +85,7 @@ public class Application {
                         Length: Min 8 Max 42
                         """,
                 "Password",
-                uInput -> (Input.isPasswordInput(uInput)
-                        && Input.isInputLengthValid(uInput, 8, 42))
+                Input::isPasswordInput
         );
 
         String phone = Input.getValidInput(
@@ -98,8 +94,7 @@ public class Application {
                         Length: Min 12 Max 13
                         """,
                 "Phone Number",
-                uInput -> (Input.isPhoneNumber(uInput)
-                && Input.isInputLengthValid(uInput,12,13))
+                uInput -> (Input.isPhoneNumber(uInput, 12, 13))
         );
 
         String street = Input.getValidInput(
@@ -108,8 +103,7 @@ public class Application {
                         Length: Min 2 Max 21
                         """,
                 "Street Name",
-                uInput -> (Input.isAlphaNumericWithSpaces(uInput)
-                && Input.isInputLengthValid(uInput,2,21))
+                uInput -> (Input.isAlphaNumericWithSpaces(uInput, 2, 21))
         );
 
         String sNr = Input.getValidInput(
@@ -118,8 +112,7 @@ public class Application {
                         Length: Min 1 Max 4
                         """,
                 "Street Number",
-                uInput -> (Input.isAlphaNumeric(uInput)
-                && Input.isInputLengthValid(uInput,1,4))
+                uInput -> (Input.isAlphaNumeric(uInput, 1, 4))
         );
 
         String city = Input.getValidInput(
@@ -128,8 +121,7 @@ public class Application {
                         Length: Min 1 Max 36
                         """,
                 "City Name",
-                uInput -> (Input.isAlpha(uInput)
-                && Input.isInputLengthValid(uInput,1,36))
+                uInput -> (Input.isAlpha(uInput, 1, 36))
         );
 
         String zip = Input.getValidInput(
@@ -138,16 +130,18 @@ public class Application {
                         Length: 5
                         """,
                 "ZIP Code",
-                uInput -> (Input.isNumeric(uInput)
-                && Input.isInputLengthValid(uInput,5,5))
+                uInput -> (Input.isNumeric(uInput, 5, 5))
         );
 
-        String country = Input.getValidInput(
-                """
-                        Only Use Alpha Values With Whitespace                        
-                        """,
-                "Country Name",
-                uInput -> (Input.isAlphaWithSpaces(uInput))
-        );
+        while (true) {
+            String country = Input.getValidInput(
+                    """
+                            Only Use Alpha Values With Whitespace                        
+                            """,
+                    "Country Name",
+                    input -> Input.isAlphaWithSpaces(input, 0, 42)
+            );
+
+        }
     }
 }

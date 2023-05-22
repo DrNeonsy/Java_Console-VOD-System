@@ -14,11 +14,12 @@ rectangle "Common User Management" as UserMgmt {
     (viewUser)
     (viewTransactions)
     (viewInventory)
+    (viewMovie)
     (updateUser)
     (deleteUser)
 }
 
-rectangle "Customer" as InvMgmt {
+rectangle {
   Buyer -- (addToCart)
   Buyer -- (removeFromCart)
   Buyer -- (viewCart)
@@ -26,7 +27,7 @@ rectangle "Customer" as InvMgmt {
   (checkout) .> (viewCart) : <<include>>
 }
 
-rectangle "Owner" as TransMgmt {
+rectangle {
   Seller -- (addMovie)
   Seller -- (removeMovie)
   Seller -- (updateMovie)
@@ -34,8 +35,5 @@ rectangle "Owner" as TransMgmt {
 }
 
 Buyer -- UserMgmt
-Buyer -- InvMgmt
-Buyer -- TransMgmt
 Seller -- UserMgmt
-Seller -- InvMgmt
 @enduml
