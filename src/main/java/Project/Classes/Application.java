@@ -136,11 +136,18 @@ public class Application {
         while (true) {
             String country = Input.getValidInput(
                     """
-                            Only Use Alpha Values With Whitespace                        
+                            Only Use Alpha Values With Whitespace
                             """,
                     "Country Name",
                     input -> Input.isAlphaWithSpaces(input, 0, 42)
             );
+            /*
+                We have a country input
+                Loop through enums, taking in the previous characters with the next until there is no longer a possible match
+                Output possible countries and make em selectable
+
+                If user selects none or no country can be suggested, get input again (go back to loop)
+             */
 
         }
     }

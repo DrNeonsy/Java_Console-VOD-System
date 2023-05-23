@@ -1,6 +1,6 @@
 package Project.Classes.Subtypes;
 
-import Project.Enums.Genres;
+import Project.Data.Enums.Genres;
 
 import java.util.ArrayList;
 

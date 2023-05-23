@@ -1,4 +1,4 @@
-package Project.Enums;
+package Project.Data.Enums;
 
 public enum Genres {
     ACTION,

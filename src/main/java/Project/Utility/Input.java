@@ -40,7 +40,7 @@ public class Input {
     }
 
     public static boolean isPasswordInput(String input) {
-        return input.matches("^(?=.{8,12}$)(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).*$");
+        return input.matches("^(?=.{8,}$)(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).*$");
     }
 
     public static String getValidInput(String instruction, String what, Function<String, Boolean> validationFunctions) {

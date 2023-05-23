@@ -1,4 +1,4 @@
-package Project.Enums;
+package Project.Data.Enums;
 
 public enum Countries {
     AFGHANISTAN,
@@ -29,7 +29,7 @@ public enum Countries {
     BULGARIA,
     BURKINA_FASO,
     BURUNDI,
-    CABO_VERDE,
+    CAPE_VERDE,
     CAMBODIA,
     CAMEROON,
     CANADA,
@@ -39,7 +39,6 @@ public enum Countries {
     CHINA,
     COLOMBIA,
     COMOROS,
-    CONGO,
     COSTA_RICA,
     CROATIA,
     CUBA,
@@ -57,7 +56,6 @@ public enum Countries {
     EQUATORIAL_GUINEA,
     ERITREA,
     ESTONIA,
-    ESWATINI,
     ETHIOPIA,
     FIJI,
     FINLAND,
@@ -88,11 +86,8 @@ public enum Countries {
     JAMAICA,
     JAPAN,
     JORDAN,
-    KAZAKHSTAN,
     KENYA,
     KIRIBATI,
-    NORTH_KOREA,
-    SOUTH_KOREA,
     KOSOVO,
     KUWAIT,
     KYRGYZSTAN,
@@ -131,7 +126,6 @@ public enum Countries {
     NICARAGUA,
     NIGER,
     NIGERIA,
-    NORTH_MACEDONIA,
     NORWAY,
     OMAN,
     PAKISTAN,

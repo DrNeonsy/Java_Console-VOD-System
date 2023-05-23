@@ -4,10 +4,11 @@ title Video On Demand System Use Cases
 skinparam actorStyle awesome
 skinparam packageStyle rectangle
 
+actor User as "User"
 actor Buyer as "Buyer"
 actor Seller as "Seller"
 
-rectangle "Common User Management" as UserMgmt {
+rectangle "Common User Actions" as UserMgmt {
     (Register)
     (Login)
     (Logout)
@@ -24,16 +25,18 @@ rectangle {
   Buyer -- (removeFromCart)
   Buyer -- (viewCart)
   Buyer -- (checkout)
-  (checkout) .> (viewCart) : <<include>>
+  (checkout) .r.> (viewCart) : <<include>>
 }
 
 rectangle {
   Seller -- (addMovie)
   Seller -- (removeMovie)
   Seller -- (updateMovie)
-  (updateMovie) .> (viewMovie) : <<extend>>
+  (updateMovie) <.. (viewMovie) : <<extend>>
 }
 
-Buyer -- UserMgmt
-Seller -- UserMgmt
+User -d- UserMgmt
+User <|-r-- Seller
+User <|-l-- Buyer
+
 @enduml
