@@ -1,5 +1,6 @@
 package Project.Classes;
 
+import Project.Data.Enums.Countries;
 import Project.Interfaces.ISellers;
 
 public class Seller extends User implements ISellers {

@@ -1,20 +1,21 @@
 package Project.Classes;
 
+import Project.Data.Enums.Countries;
 import Project.Interfaces.IUsers;
 
 public abstract class User implements IUsers {
     // ───────────────────────────────────────────────────────────────────────────────
     // ───────────────────────────────FIELDS──────────────────────────────────────────
     // ───────────────────────────────────────────────────────────────────────────────
-    private String name;
-    private String lastname;
-    private String email;
-    private String password;
-    private String phone;
-    private String address;
-    private String city;
-    private String zip;
-    private String country;
+    private String name = null;
+    private String lastname = null;
+    private String email = null;
+    private String password = null;
+    private String phone = null;
+    private String address = null;
+    private String city = null;
+    private String zip = null;
+    private Countries country = null;
 
 
     // ───────────────────────────────────────────────────────────────────────────────

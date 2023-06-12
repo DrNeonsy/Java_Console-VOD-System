@@ -1,9 +1,12 @@
 package Project.Classes;
 
 import Project.Classes.Subtypes.Movie;
+import Project.Data.Enums.Countries;
 import Project.Utility.Input;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Application {
     // ───────────────────────────────────────────────────────────────────────────────
@@ -29,6 +32,14 @@ public class Application {
         System.out.println("2. Register");
         System.out.println("3. Exit");
 
+        switch (Integer) {
+            case 1 -> login();
+            case 2 -> {
+                USERS.add(new Buyer());
+                userRegistration(USERS.get(USERS.size() - 1));
+            }
+            case 3 -> System.exit(0);
+        }
     }
 
     /// <summary>
@@ -48,8 +59,16 @@ public class Application {
         return false;
     }
 
-    private static void userRegistration() {
-        String name = Input.getValidInput(
+    private static void userRegistration(User U) {
+
+    }
+
+    private static void login() {
+
+    }
+
+    public static String setFirstName() {
+        return Input.getValidInput(
                 """
                         Only Use Alpha Values
                         No Whitespace Allowed
@@ -58,8 +77,10 @@ public class Application {
                 "First Name",
                 uInput -> (Input.isAlpha(uInput, 2, 18))
         );
+    }
 
-        String lastname = Input.getValidInput(
+    public static String setLastName() {
+        return Input.getValidInput(
                 """
                         Only Use Alpha Values
                         No Whitespace Allowed
@@ -68,8 +89,10 @@ public class Application {
                 "Last Name",
                 uInput -> (Input.isAlpha(uInput, 2, 18))
         );
+    }
 
-        String email = Input.getValidInput(
+    public static String setEmail() {
+        return Input.getValidInput(
                 """
                         Only Use Alpha Numeric Values And "- . _"
                         Basic E-Mail Format Rules Apply
@@ -78,26 +101,21 @@ public class Application {
                 "E-Mail",
                 uInput -> (Input.isEmailInput(uInput, 30))
         );
+    }
 
-        String password = Input.getValidInput(
+    public static String setPassword() {
+        return Input.getValidInput(
                 """
-                        Use Min 1 Of Each Upper/Lower/Numeric/
-                        Length: Min 8 Max 42
+                        Use Min 1 Of Each Upper/Lower/Numeric/Special
+                        Length: Min 8
                         """,
                 "Password",
                 Input::isPasswordInput
         );
+    }
 
-        String phone = Input.getValidInput(
-                """
-                        Only Use Numeric Values Without Country Code
-                        Length: Min 12 Max 13
-                        """,
-                "Phone Number",
-                uInput -> (Input.isPhoneNumber(uInput, 12, 13))
-        );
-
-        String street = Input.getValidInput(
+    public static String setSTrEetName() {
+        return Input.getValidInput(
                 """
                         Only AlphaNumeric Values With Whitespaces
                         Length: Min 2 Max 21
@@ -105,8 +123,10 @@ public class Application {
                 "Street Name",
                 uInput -> (Input.isAlphaNumericWithSpaces(uInput, 2, 21))
         );
+    }
 
-        String sNr = Input.getValidInput(
+    public static String setStreetNr() {
+        return Input.getValidInput(
                 """
                         Only AlphaNumeric Values
                         Length: Min 1 Max 4
@@ -114,8 +134,10 @@ public class Application {
                 "Street Number",
                 uInput -> (Input.isAlphaNumeric(uInput, 1, 4))
         );
+    }
 
-        String city = Input.getValidInput(
+    public static String setCity() {
+        return Input.getValidInput(
                 """
                         Only Alpha Values
                         Length: Min 1 Max 36
@@ -123,8 +145,10 @@ public class Application {
                 "City Name",
                 uInput -> (Input.isAlpha(uInput, 1, 36))
         );
+    }
 
-        String zip = Input.getValidInput(
+    public static String setZipCode() {
+        return Input.getValidInput(
                 """
                         Only Numeric Values
                         Length: 5
@@ -132,23 +156,60 @@ public class Application {
                 "ZIP Code",
                 uInput -> (Input.isNumeric(uInput, 5, 5))
         );
+    }
 
+    public static Countries setCountry() {
         while (true) {
             String country = Input.getValidInput(
                     """
                             Only Use Alpha Values With Whitespace
+                            Min 2 Max 4
                             """,
                     "Country Name",
-                    input -> Input.isAlphaWithSpaces(input, 0, 42)
+                    input -> Input.isAlphaWithSpaces(input, 2, 4)
             );
-            /*
-                We have a country input
-                Loop through enums, taking in the previous characters with the next until there is no longer a possible match
-                Output possible countries and make em selectable
 
-                If user selects none or no country can be suggested, get input again (go back to loop)
-             */
 
+            final HashMap<Character, Countries> RESULTS = new HashMap<>();
+
+            int rCount = 0;
+
+            for (Countries co : Countries.values()) {
+                if (co.toString().substring(0, country.length()).equalsIgnoreCase(country)) {
+                    RESULTS.put((char) rCount++, co);
+                }
+            }
+
+            if (!RESULTS.isEmpty()) {
+                for (Map.Entry<Character, Countries> entry : RESULTS.entrySet()) {
+                    int key = entry.getKey();
+                    Countries value = entry.getValue();
+                    System.out.printf("%-36s%5s%5s%n", value, '|', key);
+                }
+
+                char c = (char) (Input.getValidInput(
+                        """
+                                Choose a country or press enter search for another country
+                                """,
+                        "Confirm Country",
+                        input -> Input.isNumeric(input, 0, 1)
+                ).charAt(0) - '0');
+
+                if (RESULTS.containsKey(c)) {
+                    return RESULTS.get(c);
+                }
+            }
         }
+    }
+
+    public static String setPhoneNr() {
+        return Input.getValidInput(
+                """
+                        Only Use Numeric Values Without Country Code
+                        Length: Min 12 Max 13
+                        """,
+                "Phone Number",
+                uInput -> (Input.isPhoneNumber(uInput, 12, 13))
+        );
     }
 }
