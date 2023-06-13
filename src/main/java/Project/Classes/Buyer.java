@@ -10,15 +10,26 @@ public class Buyer extends User implements IBuyers {
     // ───────────────────────────────────────────────────────────────────────────────
     // ───────────────────────────────FIELDS──────────────────────────────────────────
     // ───────────────────────────────────────────────────────────────────────────────
-    private int buyerID;
-    private String creditCardNumber = null;
-    private String creditCardExpiration = null;
-    private String creditCardCVV = null;
+    private final int buyerID;
+    private String creditCardNumber;
+    private String creditCardExpiration;
+    private String creditCardCVV;
     private final ArrayList<Transaction> TRANSACTIONS = new ArrayList<>();
+
+    private static final ArrayList<String> buyerOptions = new ArrayList<>(userOptions) {{
+        add(String.format("%-18s%5s%d", "View Cart", '|', 5));
+        add(String.format("%-18s%5s%d", "Checkout", '|', 6));
+        add(String.format("%-18s%5s%d", "Logout", '|', 7));
+    }};
 
     // ───────────────────────────────────────────────────────────────────────────────
     // ───────────────────────────────Constructor──────────────────────────────────────
     // ───────────────────────────────────────────────────────────────────────────────
+
+    public Buyer() {
+        this.buyerID = Application.USERS.size() - Application.adminCounter();
+    }
+
 
     // ───────────────────────────────────────────────────────────────────────────────
     // ───────────────────────────────Methods─────────────────────────────────────────
@@ -26,12 +37,12 @@ public class Buyer extends User implements IBuyers {
 
 
     @Override
-    public void addToCart() {
+    public void addToCart() { // Catalog
 
     }
 
     @Override
-    public void removeFromCart() {
+    public void removeFromCart() { // View Cart
 
     }
 

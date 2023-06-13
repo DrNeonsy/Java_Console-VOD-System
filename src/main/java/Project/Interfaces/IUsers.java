@@ -1,9 +1,7 @@
 package Project.Interfaces;
 
 public interface IUsers {
-    void register();
-
-    void login();
+    void userMenu();
 
     void logout();
 
@@ -11,7 +9,7 @@ public interface IUsers {
 
     void updateUser();
 
-    void viewMovie();
+    void viewMovieCatalog();
 
     void viewTransactions();
 
