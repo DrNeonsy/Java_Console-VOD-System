@@ -9,8 +9,8 @@ public class Seller extends User implements ISellers {
     // ───────────────────────────────FIELDS──────────────────────────────────────────
     // ───────────────────────────────────────────────────────────────────────────────
     private final int sellerID;
-    private static final ArrayList<String> sellerOptions = new ArrayList<>(userOptions) {{
-        add(String.format("%-18s%5s%d", "Logout", '|', 5));
+    public static final ArrayList<String> sellerOptions = new ArrayList<>(userOptions) {{
+        add(String.format("%-18s%5s%3d", "Logout", '|', 5));
     }};
 
     // ───────────────────────────────────────────────────────────────────────────────

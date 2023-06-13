@@ -1,5 +1,6 @@
 package Project.Classes;
 
+import Project.Data.CountryCodes;
 import Project.Data.Enums.Countries;
 import Project.Interfaces.IUsers;
 import Project.Utility.Input;
@@ -23,10 +24,10 @@ public abstract class User implements IUsers {
     private String zip;
     private Countries country;
     protected static final ArrayList<String> userOptions = new ArrayList<>() {{
-        add(String.format("%-18s%5s%d", "Profile", '|', 1));
-        add(String.format("%-18s%5s%d", "Catalog", '|', 2));
-        add(String.format("%-18s%5s%d", "Inventory", '|', 3));
-        add(String.format("%-18s%5s%d", "Transactions", '|', 4));
+        add(String.format("%-18s%5s%3d", "Profile", '|', 1));
+        add(String.format("%-18s%5s%3d", "Catalog", '|', 2));
+        add(String.format("%-18s%5s%3d", "Inventory", '|', 3));
+        add(String.format("%-18s%5s%3d", "Transactions", '|', 4));
     }};
 
     // ───────────────────────────────────────────────────────────────────────────────
@@ -39,10 +40,12 @@ public abstract class User implements IUsers {
         this.email = setEmail();
         this.password = setPassword();
         this.phone = setPhoneNr();
-        this.address = setSTrEetName() + " " + setStreetNr();
+        this.address = setStreeeeetName() + " " + setStreetNr();
         this.city = setCity();
         this.zip = setZipCode();
         this.country = setCountry();
+
+        this.phone = '+' + CountryCodes.COUNTRY_CODES.get(country) + " " + phone;
     }
 
     // ───────────────────────────────────────────────────────────────────────────────
@@ -52,17 +55,62 @@ public abstract class User implements IUsers {
 
     @Override
     public void userMenu() {
+        while (true) {
+            //region output
+            System.out.println();
 
+            if (this instanceof Buyer) {
+                for (String s : Buyer.buyerOptions) {
+                    System.out.println(s);
+                }
+            }
+            if (this instanceof Seller) {
+                for (String s : Seller.sellerOptions) {
+                    System.out.println(s);
+                }
+            }
+            //endregion
+
+            //region option selection
+            int option = Integer.parseInt(Input.getValidInput("", "Choose an Option", uInput -> (Input.isNumeric(uInput, 1, 1))));
+            switch (option) {
+                case 1 -> viewUser();
+                case 2 -> viewMovieCatalog();
+                case 3 -> viewInventory();
+                case 4 -> viewTransactions();
+            }
+            if (this instanceof Buyer b) {
+                switch (option) {
+                    case 5 -> b.viewCart();
+                    case 6 -> b.checkout();
+                    case 7 -> {
+                        return;
+                    }
+                }
+            }
+            if (this instanceof Seller) {
+                if (option == 5) {
+                    return;
+                }
+            }
+            //endregion
+        }
     }
 
     @Override
-    public void logout() {
-
-    }
-
-    @Override
-    public void viewUser() { // Profile
-
+    public void viewUser() {
+        String s = '{' +
+                "name='" + name +
+                ", lastname='" + lastname +
+                ", email='" + email +
+                ", password='" + password +
+                ", phone='" + phone +
+                ", address='" + address +
+                ", city='" + city +
+                ", zip='" + zip +
+                ", country=" + country +
+                '}';
+        System.out.println(s);
     }
 
     @Override
@@ -137,14 +185,14 @@ public abstract class User implements IUsers {
         );
     }
 
-    protected static String setSTrEetName() {
+    protected static String setStreeeeetName() {
         return Input.getValidInput(
                 """
                         Only AlphaNumeric Values With Whitespaces
-                        Length: Min 2 Max 21
+                        Length: Min 3 Max 21
                         """,
                 "Street Name",
-                uInput -> (Input.isAlphaNumericWithSpaces(uInput, 2, 21))
+                uInput -> (Input.isAlphaWithSpaces(uInput, 3, 21))
         );
     }
 
@@ -163,10 +211,10 @@ public abstract class User implements IUsers {
         return Input.getValidInput(
                 """
                         Only Alpha Values
-                        Length: Min 1 Max 36
+                        Length: Min 4 Max 36
                         """,
                 "City Name",
-                uInput -> (Input.isAlpha(uInput, 1, 36))
+                uInput -> (Input.isAlpha(uInput, 4, 36))
         );
     }
 

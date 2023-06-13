@@ -1,12 +1,9 @@
 package Project.Classes;
 
 import Project.Classes.Subtypes.Movie;
-import Project.Data.Enums.Countries;
 import Project.Utility.Input;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Application {
     // ───────────────────────────────────────────────────────────────────────────────
@@ -19,7 +16,7 @@ public class Application {
     // ───────────────────────────────Methods─────────────────────────────────────────
     // ───────────────────────────────────────────────────────────────────────────────
     public static void initialization() {
-        if (adminCounter() <= 0) {
+        if (adminCounter() <= -1) {
             USERS.add(new Seller());
         }
         mainMenu();
@@ -61,14 +58,18 @@ public class Application {
 
     private static void login() {
 
-        System.out.println("Login:");
-    //Ask for correct password and email
-        for (User u: USERS) {
-           if(Input.getValidInput("","E-mail",uInput -> Input.isEmailInput(uInput,30)).equals(u.getEmail()) && Input.getValidInput("","Password",uInput -> Input.isPasswordInput(uInput)).equals(u.getPassword())){
-               System.out.println("Login erfolgreich :)");
-           }
+        System.out.println("Login");
+        //Asky for correct password and email
+        String emailInput = Input.getValidInput("", "E-mail", uInput -> Input.isEmailInput(uInput, 30));
+        String pwInput = Input.getValidInput("", "Password", Input::isPasswordInput);
+
+        for (User u : USERS) {
+            if (emailInput.equals(u.getEmail()) && pwInput.equals(u.getPassword())) {
+                u.userMenu();
+                return;
+            }
         }
-        System.out.println("Try again :(");
+        System.out.println("You've faile:D jeyson! :)");
     }
 
 }
