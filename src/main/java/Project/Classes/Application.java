@@ -1,8 +1,10 @@
 package Project.Classes;
 
 import Project.Classes.Subtypes.Movie;
+import Project.Data.JSON.JSONHandler;
 import Project.Utility.Input;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Application {
@@ -15,14 +17,14 @@ public class Application {
     // ───────────────────────────────────────────────────────────────────────────────
     // ───────────────────────────────Methods─────────────────────────────────────────
     // ───────────────────────────────────────────────────────────────────────────────
-    public static void initialization() {
+    public static void initialization() throws IOException {
         if (adminCounter() <= -1) {
-            USERS.add(new Seller());
+            USERS.add(new Seller(true));
         }
         mainMenu();
     }
 
-    private static void mainMenu() {
+    private static void mainMenu() throws IOException {
         while (true) {
             System.out.println("Welcome to the Movie Store!" + System.lineSeparator());
 
@@ -32,8 +34,11 @@ public class Application {
 
             switch (Integer.parseInt(Input.getValidInput("", "Choose an Option", uInput -> (Input.isNumeric(uInput, 1, 1))))) {
                 case 1 -> login();
-                case 2 -> USERS.add(new Buyer());
-                case 3 -> System.exit(0);
+                case 2 -> USERS.add(new Buyer(true));
+                case 3 -> {
+                    JSONHandler.saveUser();
+                    System.exit(0);
+                }
             }
         }
     }
@@ -50,7 +55,6 @@ public class Application {
             if (user instanceof Seller) {
                 a++;
             }
-
         }
         return a;
     }
@@ -59,7 +63,7 @@ public class Application {
     private static void login() {
 
         System.out.println("Login");
-        //Asky for correct password and email
+
         String emailInput = Input.getValidInput("", "E-mail", uInput -> Input.isEmailInput(uInput, 30));
         String pwInput = Input.getValidInput("", "Password", Input::isPasswordInput);
 

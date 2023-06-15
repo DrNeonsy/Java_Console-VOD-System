@@ -9,7 +9,7 @@ public class Buyer extends User implements IBuyers {
     // ───────────────────────────────────────────────────────────────────────────────
     // ───────────────────────────────FIELDS──────────────────────────────────────────
     // ───────────────────────────────────────────────────────────────────────────────
-    private final int buyerID;
+    private int buyerID;
     private String creditCardNumber;
     private String creditCardExpiration;
     private String creditCardCVV;
@@ -25,10 +25,17 @@ public class Buyer extends User implements IBuyers {
     // ───────────────────────────────Constructor──────────────────────────────────────
     // ───────────────────────────────────────────────────────────────────────────────
 
-    public Buyer() {
-        this.buyerID = Application.USERS.size() - Application.adminCounter();
+    public Buyer(boolean input) {
+        super(input);
+        if (input) {
+            this.buyerID = Application.USERS.size() - Application.adminCounter() + 1;
+        } else {
+//            this.creditCardNumber = null;
+//            this.creditCardExpiration = null;
+//            this.creditCardCVV = null;
+//            this.buyerID = null;
+        }
     }
-
 
     // ───────────────────────────────────────────────────────────────────────────────
     // ───────────────────────────────Methods─────────────────────────────────────────
@@ -53,5 +60,25 @@ public class Buyer extends User implements IBuyers {
     @Override
     public void checkout() {
 
+    }
+
+    @Override
+    public String toString() {
+        String[] data = new String[]{
+                creditCardNumber,
+                creditCardExpiration,
+                creditCardCVV};
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(super.toString());
+
+        for (String s : data) {
+            sb.append(String.format("%-2s%-37s%-2s%n", '|', s, '|'));
+        }
+
+        sb.append("BuyerID: ").append(buyerID);
+
+        return sb.toString();
     }
 }

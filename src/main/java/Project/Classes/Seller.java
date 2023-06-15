@@ -8,7 +8,7 @@ public class Seller extends User implements ISellers {
     // ───────────────────────────────────────────────────────────────────────────────
     // ───────────────────────────────FIELDS──────────────────────────────────────────
     // ───────────────────────────────────────────────────────────────────────────────
-    private final int sellerID;
+    private int sellerID;
     public static final ArrayList<String> sellerOptions = new ArrayList<>(userOptions) {{
         add(String.format("%-18s%5s%3d", "Logout", '|', 5));
     }};
@@ -17,8 +17,13 @@ public class Seller extends User implements ISellers {
     // ───────────────────────────────Constructor──────────────────────────────────────
     // ───────────────────────────────────────────────────────────────────────────────
 
-    public Seller() {
-        this.sellerID = Application.adminCounter();
+    public Seller(boolean input) {
+        super(input);
+        if (input) {
+            this.sellerID = Application.adminCounter() + 1;
+        } else {
+//            this.sellerID = null;
+        }
     }
 
     // ───────────────────────────────────────────────────────────────────────────────
@@ -38,5 +43,13 @@ public class Seller extends User implements ISellers {
     @Override
     public void updateMovie() { // Catalog
 
+    }
+
+    public String toString() {
+
+        String sb = super.toString() +
+                "SellerID: " + sellerID;
+
+        return sb;
     }
 }

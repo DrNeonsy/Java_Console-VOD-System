@@ -1,0 +1,21 @@
+{
+  "sellers": [],
+  "buyers": [
+    {
+      "buyerID": 1,
+      "creditCardNumber": null,
+      "creditCardExpiration": null,
+      "creditCardCVV": null,
+      "TRANSACTIONS": [],
+      "name": "myrian",
+      "lastname": "ramboo",
+      "email": "myria@scope.org",
+      "password": "qwE123?!",
+      "phone": "+49 123456789011",
+      "address": "laneslane 42",
+      "city": "vice",
+      "zip": "75012",
+      "country": "GERMANY"
+    }
+  ]
+}

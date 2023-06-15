@@ -34,17 +34,29 @@ public abstract class User implements IUsers {
     // ───────────────────────────────Constructor──────────────────────────────────────
     // ───────────────────────────────────────────────────────────────────────────────
 
-    public User() {
-        this.name = setFirstName();
-        this.lastname = setLastName();
-        this.email = setEmail();
-        this.password = setPassword();
-        this.phone = setPhoneNr();
-        this.address = setStreeeeetName() + " " + setStreetNr();
-        this.city = setCity();
-        this.zip = setZipCode();
-        this.country = setCountry();
+    public User(boolean input) {
+        if (input) {
+            this.name = setFirstName();
+            this.lastname = setLastName();
+            this.email = setEmail();
+            this.password = setPassword();
+            this.phone = setPhoneNr();
+            this.address = setStreeeeetName() + " " + setStreetNr();
+            this.city = setCity();
+            this.zip = setZipCode();
+            this.country = setCountry();
+        } else {
+//            this.name = null;
+//            this.lastname = null;
+//            this.email = null;
+//            this.password = null;
+//            this.phone = null;
+//            this.address = null;
+//            this.city = null;
+//            this.zip = null;
+//            this.country = null;
 
+        }
         this.phone = '+' + CountryCodes.COUNTRY_CODES.get(country) + " " + phone;
     }
 
@@ -99,18 +111,11 @@ public abstract class User implements IUsers {
 
     @Override
     public void viewUser() {
-        String s = '{' +
-                "name='" + name +
-                ", lastname='" + lastname +
-                ", email='" + email +
-                ", password='" + password +
-                ", phone='" + phone +
-                ", address='" + address +
-                ", city='" + city +
-                ", zip='" + zip +
-                ", country=" + country +
-                '}';
-        System.out.println(s);
+        if (this instanceof Buyer b) {
+            System.out.println(b);
+        } else {
+            System.out.println(this);
+        }
     }
 
     @Override
@@ -290,5 +295,28 @@ public abstract class User implements IUsers {
 
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String toString() {
+        String[] data = new String[]{
+                name,
+                lastname,
+                email,
+                password,
+                phone,
+                address,
+                city,
+                zip,
+                country.toString()};
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Current User Information\n");
+
+        for (String s : data) {
+            sb.append(String.format("%-2s%-37s%-2s%n", '|', s, '|'));
+        }
+        return sb.toString();
     }
 }
