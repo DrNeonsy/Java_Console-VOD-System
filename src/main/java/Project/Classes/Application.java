@@ -18,8 +18,8 @@ public class Application {
     // ───────────────────────────────Methods─────────────────────────────────────────
     // ───────────────────────────────────────────────────────────────────────────────
     public static void initialization() throws IOException {
-        if (adminCounter() <= -1) {
-            USERS.add(new Seller(true));
+        if (adminCounter() <= 0) {
+            USERS.add(new Seller());
         }
         mainMenu();
     }
@@ -32,11 +32,11 @@ public class Application {
             System.out.println("2. Register");
             System.out.println("3. Exit");
 
-            switch (Integer.parseInt(Input.getValidInput("", "Choose an Option", uInput -> (Input.isNumeric(uInput, 1, 1))))) {
+            switch (Integer.parseInt(Input.getValidInput("", "AAAAn Option", uInput -> (Input.isNumeric(uInput, 1, 1))))) {
                 case 1 -> login();
-                case 2 -> USERS.add(new Buyer(true));
+                case 2 -> USERS.add(new Buyer());
                 case 3 -> {
-                    JSONHandler.saveUser();
+                    JSONHandler.saveData();
                     System.exit(0);
                 }
             }

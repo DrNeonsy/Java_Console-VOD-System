@@ -7,6 +7,7 @@ import Project.Utility.Input;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 
@@ -14,6 +15,7 @@ public abstract class User implements IUsers {
     // ───────────────────────────────────────────────────────────────────────────────
     // ───────────────────────────────FIELDS──────────────────────────────────────────
     // ───────────────────────────────────────────────────────────────────────────────
+    private transient boolean accountActive = true;
     private String name;
     private String lastname;
     private String email;
@@ -34,30 +36,29 @@ public abstract class User implements IUsers {
     // ───────────────────────────────Constructor──────────────────────────────────────
     // ───────────────────────────────────────────────────────────────────────────────
 
-    public User(boolean input) {
-        if (input) {
-            this.name = setFirstName();
-            this.lastname = setLastName();
-            this.email = setEmail();
-            this.password = setPassword();
-            this.phone = setPhoneNr();
-            this.address = setStreeeeetName() + " " + setStreetNr();
-            this.city = setCity();
-            this.zip = setZipCode();
-            this.country = setCountry();
-        } else {
-//            this.name = null;
-//            this.lastname = null;
-//            this.email = null;
-//            this.password = null;
-//            this.phone = null;
-//            this.address = null;
-//            this.city = null;
-//            this.zip = null;
-//            this.country = null;
-
-        }
+    public User() {
+        this.name = setFirstName();
+        this.lastname = setLastName();
+        this.email = setEmail();
+        this.password = setPassword();
+        this.phone = setPhoneNr();
+        this.address = setStreeeeetName() + " " + setStreetNr();
+        this.city = setCity();
+        this.zip = setZipCode();
+        this.country = setCountry();
         this.phone = '+' + CountryCodes.COUNTRY_CODES.get(country) + " " + phone;
+    }
+
+    public User(HashMap<Object, Object> data) {
+        this.name = (String) data.get("name");
+        this.lastname = (String) data.get("lastname");
+        this.email = (String) data.get("email");
+        this.password = (String) data.get("password");
+        this.phone = (String) data.get("phone");
+        this.address = (String) data.get("address");
+        this.city = (String) data.get("city");
+        this.zip = (String) data.get("zip");
+        this.country = Countries.valueOf((String) data.get("country"));
     }
 
     // ───────────────────────────────────────────────────────────────────────────────
@@ -67,7 +68,7 @@ public abstract class User implements IUsers {
 
     @Override
     public void userMenu() {
-        while (true) {
+        while (accountActive) {
             //region output
             System.out.println();
 
@@ -84,7 +85,7 @@ public abstract class User implements IUsers {
             //endregion
 
             //region option selection
-            int option = Integer.parseInt(Input.getValidInput("", "Choose an Option", uInput -> (Input.isNumeric(uInput, 1, 1))));
+            int option = Integer.parseInt(Input.getValidInput("", "AAAAn Option", uInput -> (Input.isNumeric(uInput, 1, 1))));
             switch (option) {
                 case 1 -> viewUser();
                 case 2 -> viewMovieCatalog();
@@ -116,11 +117,30 @@ public abstract class User implements IUsers {
         } else {
             System.out.println(this);
         }
+        int option = Integer.parseInt(Input.getValidInput("", "AaAn Option", uInput -> (Input.isNumeric(uInput, 1, 1))));
+        switch (option) {
+            case 1 -> updateUser();
+            case 2 -> deleteUser();
+        }
     }
 
     @Override
     public void updateUser() { // Profile
-
+        int option = Integer.parseInt(Input.getValidInput("", "an Option", uInput -> (Input.isNumeric(uInput, 1, 1))));
+        switch (option) {
+            case 1 -> this.name = setFirstName();
+            case 2 -> this.lastname = setLastName();
+            case 3 -> this.email = setEmail();
+            case 4 -> this.password = setPassword();
+            case 5 -> this.phone = this.phone.substring(0, this.phone.indexOf(' ') + 1) + setPhoneNr();
+            case 6 -> this.address = setStreeeeetName() + " " + setStreetNr();
+            case 7 -> this.city = setCity();
+            case 8 -> this.zip = setZipCode();
+            case 9 -> {
+                this.country = setCountry();
+                this.phone = '+' + CountryCodes.COUNTRY_CODES.get(country) + this.phone.substring(this.phone.indexOf(' '));
+            }
+        }
     }
 
     @Override
@@ -140,7 +160,11 @@ public abstract class User implements IUsers {
 
     @Override
     public void deleteUser() { // Profile
-
+        if (this instanceof Buyer || (this instanceof Seller && Application.adminCounter() > 1)) {
+            Application.USERS.remove(this);
+            this.accountActive = false;
+            Application.USERS.trimToSize();
+        }
     }
 
     protected static String setFirstName() {
@@ -299,23 +323,24 @@ public abstract class User implements IUsers {
 
     @Override
     public String toString() {
-        String[] data = new String[]{
-                name,
-                lastname,
-                email,
-                password,
-                phone,
-                address,
-                city,
-                zip,
-                country.toString()};
+        LinkedHashMap<String, Object> data = new LinkedHashMap<>() {{
+            put("name", name);
+            put("lastname", lastname);
+            put("email", email);
+            put("password", password);
+            put("phone", phone);
+            put("address", address);
+            put("city", city);
+            put("zip", zip);
+            put("country", country.toString());
+        }};
 
         StringBuilder sb = new StringBuilder();
 
         sb.append("Current User Information\n");
 
-        for (String s : data) {
-            sb.append(String.format("%-2s%-37s%-2s%n", '|', s, '|'));
+        for (Map.Entry<String, Object> e : data.entrySet()) {
+            sb.append(String.format("%-2s%-23s: %-54s%-2s%n", '|', e.getKey(), e.getValue(), '|'));
         }
         return sb.toString();
     }

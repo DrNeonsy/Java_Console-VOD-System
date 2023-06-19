@@ -1,8 +1,10 @@
 package Project.Classes;
 
 import Project.Interfaces.ISellers;
+import com.google.gson.annotations.Expose;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Seller extends User implements ISellers {
     // ───────────────────────────────────────────────────────────────────────────────
@@ -17,13 +19,13 @@ public class Seller extends User implements ISellers {
     // ───────────────────────────────Constructor──────────────────────────────────────
     // ───────────────────────────────────────────────────────────────────────────────
 
-    public Seller(boolean input) {
-        super(input);
-        if (input) {
-            this.sellerID = Application.adminCounter() + 1;
-        } else {
-//            this.sellerID = null;
-        }
+    public Seller() {
+        this.sellerID = Application.adminCounter() + 1;
+    }
+
+    public Seller(HashMap<Object, Object> data) {
+        super(data);
+        this.sellerID = Integer.parseInt((String) data.get("sellerID"));
     }
 
     // ───────────────────────────────────────────────────────────────────────────────
@@ -47,8 +49,7 @@ public class Seller extends User implements ISellers {
 
     public String toString() {
 
-        String sb = super.toString() +
-                "SellerID: " + sellerID;
+        String sb = "SellerID: " + sellerID + System.lineSeparator() + super.toString();
 
         return sb;
     }

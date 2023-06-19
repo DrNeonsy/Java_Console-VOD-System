@@ -1,16 +1,19 @@
 package Project.Data.JSON;
 
+import Project.Classes.Application;
 import Project.Classes.Buyer;
 import Project.Classes.Seller;
+import Project.Classes.Subtypes.Movie;
 import Project.Classes.User;
 
 import java.util.ArrayList;
 
-public class UserDatabase {
+public class JSONExport {
     public final ArrayList<Seller> sellers;
     public final ArrayList<Buyer> buyers;
+    public final ArrayList<Movie> movies = new ArrayList<>(Application.MOVIES);
 
-    public UserDatabase(ArrayList<User> USERS) {
+    public JSONExport(ArrayList<User> USERS) {
 
         buyers = new ArrayList<>();
         sellers = new ArrayList<>();

@@ -1,21 +1,51 @@
 {
-  "sellers": [],
+  "sellers": [
+    {
+      "sellerID": 1,
+      "name": "ma",
+      "lastname": "ma",
+      "email": "ma@ma.ma",
+      "password": "AAAbbb123?",
+      "phone": "+45 111111111111",
+      "address": "asf 1",
+      "city": "cizghsa",
+      "zip": "34578",
+      "country": "DENMARK"
+    }
+  ],
   "buyers": [
     {
       "buyerID": 1,
       "creditCardNumber": null,
       "creditCardExpiration": null,
       "creditCardCVV": null,
-      "TRANSACTIONS": [],
-      "name": "myrian",
-      "lastname": "ramboo",
-      "email": "myria@scope.org",
-      "password": "qwE123?!",
-      "phone": "+49 123456789011",
-      "address": "laneslane 42",
-      "city": "vice",
-      "zip": "75012",
+      "TRANSACTIONS": null,
+      "name": "uz",
+      "lastname": "us",
+      "email": "uz@uz.uz",
+      "password": "AAAbbb123?",
+      "phone": "+49 1111111111111",
+      "address": "asf 1",
+      "city": "vgfdes",
+      "zip": "12462",
       "country": "GERMANY"
+    },
+    {
+      "buyerID": 2,
+      "creditCardNumber": null,
+      "creditCardExpiration": null,
+      "creditCardCVV": null,
+      "TRANSACTIONS": null,
+      "name": "de",
+      "lastname": "dede",
+      "email": "de@de.de",
+      "password": "asdaWWW222!",
+      "phone": "+995 2352352552352",
+      "address": "fwgsdgg 345",
+      "city": "dfggf",
+      "zip": "54353",
+      "country": "GEORGIA"
     }
-  ]
+  ],
+  "movies": []
 }

@@ -1,0 +1,3 @@
+Adjust the collection inits to use the constructor due to overhead
+
+Change arraylist to linkedlist for performance
